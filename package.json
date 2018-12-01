@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rollup --watch --config ./build/rollup.config.js"
+    "rollup": "rollup --watch --config ./build/rollup.config.js",
+    "dev": "node ./build/webpack.dev.conf.js",
+    "prod": "node ./build/webpack.prod.conf.js"
   },
   "author": "",
   "license": "ISC",
