@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rollup": "rollup --watch --config ./build/rollup.config.js",
-    "dev": "node ./build/webpack.dev.conf.js",
-    "prod": "node ./build/webpack.prod.conf.js"
+    "rollup": "rollup --config ./build/rollup.config.js",
+    "rollup:watch": "rollup --watch --config ./build/rollup.config.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"

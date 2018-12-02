@@ -13,7 +13,7 @@ Dep.prototype.addSub = function (sub) {
 Dep.prototype.notify = function () {
   let subs = this.subs
   subs.forEach(sub => {
-    subs.update()
+    sub.update()
   })
 }
 

@@ -1,7 +1,7 @@
-import { defineReactive, watcher, Watcher } from './core/index'
-import { proxy } from './core/proxy';
-
-export default function Vue (options = {}) {
+import { Watcher } from './core/index'
+import { proxy } from './core/proxy'
+import { defineReactive } from './core/defineReactive'
+function Vue (options = {}) {
   this.$options = options
   this._init()
 }
@@ -24,8 +24,8 @@ function initData (vm, data) {
     } else if (data[key] instanceof Array) {
       console.log(`data[${key}] is Array`)
     } else {
+      proxy(vm, '_data', key)                                // 把 data 数据代理到 Vue 实例上
       defineReactive(data, key, data[key])
-      proxy(vm, '_data',key)
     }
   })
 }
@@ -36,11 +36,15 @@ function initData (vm, data) {
  * @param {Object} computed
  */
 function initComputed (vm, computed) {
-  let watchers = vm._computedWatchers = Object.create(null)
+  let watchers = vm._computedWatchers = Object.create(null)   // 创建一个空对象用于存放 watcher
   for (let key in computed) {
     watchers[key] = new Watcher(vm, computed[key])
     Object.defineProperty(vm, key, {
-      get: computed[key],
+      get: function () {
+        console.log(`获取 computed[${key} => ${watchers[key].value}`)
+        const watcher = watchers[key]
+        return watcher.value
+      },
       set () {
         console.log('warn: computed do not change')
       }
@@ -51,3 +55,5 @@ function initComputed (vm, computed) {
 function initProps (vm, props) {
 
 }
+
+export default Vue

@@ -11,3 +11,14 @@ Watcher.prototype.get = function () {
   popTarget()
   return value
 }
+
+Watcher.prototype.addDep = function (dep) {
+  dep.addSub(this)
+}
+
+Watcher.prototype.update = function () {
+  console.log(`watcher update`)
+  console.log(this.getter)
+  let value = this.getter.call(this.vm)
+  this.value = value
+}
