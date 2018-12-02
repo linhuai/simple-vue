@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="../../dist/vue.js"></script>
+  <script>
+    console.log(22, Vue)
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        price: 5,
+        count: 2
+      },
+      computed: {
+        total () {
+          console.log(`更新 total => ${this.price * this.count}`)
+          console.log(this.price, this.count)
+          return this.price * this.count
+        }
+      }
+    })
+    setTimeout(() => {
+      vm.count = 4
+    }, 3000)
+  </script>
+</body>
+</html>
